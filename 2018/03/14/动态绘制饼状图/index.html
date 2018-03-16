@@ -79,18 +79,19 @@
 
 
 
-<meta name="description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图">
+<meta name="description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图更新图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态绘制饼状图">
 <meta property="og:url" content="http://yoursite.com/2018/03/14/动态绘制饼状图/index.html">
 <meta property="og:site_name" content="_xiangpan">
-<meta property="og:description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图">
+<meta property="og:description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图更新图">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8518334-cb3335e72c9ce1ee.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-14T08:40:21.735Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8518334-e2a2ff91ac271033.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-03-16T03:54:42.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态绘制饼状图">
-<meta name="twitter:description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图">
+<meta name="twitter:description" content="项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。参考+实践  一、惯例先上效果图更新图">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8518334-cb3335e72c9ce1ee.gif?imageMogr2/auto-orient/strip">
 
 
@@ -335,7 +336,7 @@
       
         <p>项目里面的需求，当时搜索到MPAndroidChart库，可以实现，但是只是一个需求就引用偌大的一个库，感觉不太爽，打算自己自定义一个。<br>参考+实践</p>
 <hr>
-<h1 id="一、惯例先上效果图"><a href="#一、惯例先上效果图" class="headerlink" title="一、惯例先上效果图"></a>一、惯例先上效果图</h1><p><img src="https://upload-images.jianshu.io/upload_images/8518334-cb3335e72c9ce1ee.gif?imageMogr2/auto-orient/strip" alt="效果图"><br><a id="more"></a></p>
+<h1 id="一、惯例先上效果图"><a href="#一、惯例先上效果图" class="headerlink" title="一、惯例先上效果图"></a>一、惯例先上效果图</h1><p><img src="https://upload-images.jianshu.io/upload_images/8518334-cb3335e72c9ce1ee.gif?imageMogr2/auto-orient/strip" alt="效果图"><br>更新图<br><img src="https://upload-images.jianshu.io/upload_images/8518334-e2a2ff91ac271033.gif?imageMogr2/auto-orient/strip" alt="更新后效果图"><br><a id="more"></a></p>
 <h1 id="二、GitHub"><a href="#二、GitHub" class="headerlink" title="二、GitHub"></a>二、GitHub</h1><p><a href="https://github.com/MNXP/XPPieChart" target="_blank" rel="noopener">代码地址，欢迎指正https://github.com/MNXP/XPPieChart</a></p>
 <h1 id="三、思路"><a href="#三、思路" class="headerlink" title="三、思路"></a>三、思路</h1><pre><code>1、空心图（一个大圆中心绘制一个小圆）
 2、根据数据算出所占的角度
@@ -364,6 +365,11 @@ paint.setColor(Color.parseColor(cakeValues.get(colorIndex).getColors()));
 <pre><code>isDrawByAnim判断是否需要动画绘制
 drawCake()为静态绘制饼状图
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void surfaceCreated(SurfaceHolder holder) &#123;</span><br><span class="line">    if (!isFirst||!isDrawByAnim)</span><br><span class="line">          drawCake();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="五、更新"><a href="#五、更新" class="headerlink" title="五、更新"></a>五、更新</h1><pre><code>增加立体效果，提取配置参数
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;CakeSurfaceView&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;isDrawByAnim&quot; format=&quot;boolean&quot;/&gt;//是否动画</span><br><span class="line">        &lt;attr name=&quot;isSolid&quot; format=&quot;boolean&quot;/&gt;//是否立体</span><br><span class="line">        &lt;attr name=&quot;duration&quot; format=&quot;integer|reference&quot;/&gt;//动画时间</span><br><span class="line">        &lt;attr name=&quot;defaultColor&quot; format=&quot;string&quot;/&gt;//默认颜色</span><br><span class="line"></span><br><span class="line">        &lt;attr name=&quot;ringWidth&quot; format=&quot;integer|reference&quot;/&gt;//圆环宽度</span><br><span class="line">        &lt;attr name=&quot;solidWidth&quot; format=&quot;integer|reference&quot;/&gt;//立体宽度</span><br><span class="line">        &lt;attr name=&quot;fineTuningWidth&quot; format=&quot;integer|reference&quot;/&gt;//微调宽度</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>xml中使用
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.xp.xppiechart.view.CakeSurfaceView</span><br><span class="line">            android:id=&quot;@+id/assets_pie_chart&quot;</span><br><span class="line">            android:background=&quot;#ffffff&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            app:defaultColor=&quot;#ff8712&quot;</span><br><span class="line">            app:ringWidth=&quot;20&quot;</span><br><span class="line">            app:solidWidth=&quot;5&quot;</span><br><span class="line">            app:duration=&quot;3000&quot;</span><br><span class="line">            app:isSolid=&quot;true&quot;</span><br><span class="line">            app:isDrawByAnim=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>以上就是简单的实现动态绘制饼状图，待完善，以后会更新。如有建议和意见，请及时沟通。</p>
 
@@ -553,7 +559,7 @@ drawCake()为静态绘制饼状图
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、惯例先上效果图"><span class="nav-number">1.</span> <span class="nav-text">一、惯例先上效果图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、GitHub"><span class="nav-number">2.</span> <span class="nav-text">二、GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、思路"><span class="nav-number">3.</span> <span class="nav-text">三、思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、实现"><span class="nav-number">4.</span> <span class="nav-text">四、实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、空心图（一个大圆中心绘制一个小圆）初始化数据"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">1、空心图（一个大圆中心绘制一个小圆）初始化数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、根据数据算出所占的角度"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">2、根据数据算出所占的角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、根据动画获取当前绘制的角度"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">3、根据动画获取当前绘制的角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、根据当前角度获取Paint使用的颜色"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">4、根据当前角度获取Paint使用的颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、动态绘制即将绘制的-和-绘制已经绘制的部分"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">5、动态绘制即将绘制的 和 绘制已经绘制的部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、特别注意"><span class="nav-number">4.0.0.6.</span> <span class="nav-text">6、特别注意</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、惯例先上效果图"><span class="nav-number">1.</span> <span class="nav-text">一、惯例先上效果图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、GitHub"><span class="nav-number">2.</span> <span class="nav-text">二、GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、思路"><span class="nav-number">3.</span> <span class="nav-text">三、思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、实现"><span class="nav-number">4.</span> <span class="nav-text">四、实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、空心图（一个大圆中心绘制一个小圆）初始化数据"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">1、空心图（一个大圆中心绘制一个小圆）初始化数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、根据数据算出所占的角度"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">2、根据数据算出所占的角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、根据动画获取当前绘制的角度"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">3、根据动画获取当前绘制的角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、根据当前角度获取Paint使用的颜色"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">4、根据当前角度获取Paint使用的颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、动态绘制即将绘制的-和-绘制已经绘制的部分"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">5、动态绘制即将绘制的 和 绘制已经绘制的部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、特别注意"><span class="nav-number">4.0.0.6.</span> <span class="nav-text">6、特别注意</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、更新"><span class="nav-number">5.</span> <span class="nav-text">五、更新</span></a></li></ol></div>
             
 
           </div>
