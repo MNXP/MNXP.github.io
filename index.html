@@ -207,6 +207,104 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/10/Flutter 项目安装崩溃 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiangpan">
+      <meta itemprop="description" content="一本正经的胡说八道  正正经经的胡闹">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="_xiangpan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/08/10/Flutter 项目安装崩溃 /" class="post-title-link" itemprop="url">Flutter项目安装崩溃</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-10 14:30:00 / 修改时间：14:28:59" itemprop="dateCreated datePublished" datetime="2020-08-10T14:30:00+08:00">2020-08-10</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>刚开始接触Flutter，记录遇到的坑</p>
+<p><meta name="referrer" content="no-referrer"></p>
+<hr>
+<h4 id="打包的时候找不到libflutter-so文件导致安装flutter项目崩溃"><a href="#打包的时候找不到libflutter-so文件导致安装flutter项目崩溃" class="headerlink" title="打包的时候找不到libflutter.so文件导致安装flutter项目崩溃"></a>打包的时候找不到libflutter.so文件导致安装flutter项目崩溃</h4><pre><code>这是对应平台的so文件不存在造成的，方法是只选择一种平台，一般手机对支持armv7架构，所以在app的build.gradle下设置ndk过滤就好
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ndk &#123;//选择要添加的对应cpu类型的.so库。</span><br><span class="line">     abiFilters &apos;armeabi-v7a&apos;</span><br><span class="line">     // abiFilters &apos;arm64-v8a&apos;</span><br><span class="line">    // 还可以添加 &apos;x86&apos;, &apos;x86_64&apos;, &apos;mips&apos;, &apos;mips64&apos;, &apos;armeabi&apos;,&apos;armeabi-v7a&apos;, &apos;arm64-v8a&apos;       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="但是有个问题，最新的flutter默认只打64位的包，armv7的也会找不到那个so，这个时候就需要改flutter的编译环境了"><a href="#但是有个问题，最新的flutter默认只打64位的包，armv7的也会找不到那个so，这个时候就需要改flutter的编译环境了" class="headerlink" title="但是有个问题，最新的flutter默认只打64位的包，armv7的也会找不到那个so，这个时候就需要改flutter的编译环境了"></a>但是有个问题，最新的flutter默认只打64位的包，armv7的也会找不到那个so，这个时候就需要改flutter的编译环境了</h5><pre><code>在以下目录找到flutter.gradle
+ .../flutter/packages/flutter_tools/gradle/flutter.gradle
+</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">修改为一下代码</span><br><span class="line">  private List&lt;String&gt; getTargetPlatforms() &#123;</span><br><span class="line">       return DEFAULT_PLATFORMS</span><br><span class="line">       // if (!project.hasProperty(&apos;target-platform&apos;)) &#123;</span><br><span class="line">       //     return DEFAULT_PLATFORMS</span><br><span class="line">       // &#125;</span><br><span class="line">       // return project.property(&apos;target-platform&apos;).split(&apos;,&apos;).collect &#123;</span><br><span class="line">       //     if (!PLATFORM_ARCH_MAP[it]) &#123;</span><br><span class="line">       //         throw new GradleException(&quot;Invalid platform: $it.&quot;)</span><br><span class="line">       //     &#125;</span><br><span class="line">       //     return it</span><br><span class="line">       // &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p> <img src="https://upload-images.jianshu.io/upload_images/8518334-7b413056caf4a46d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改后的代码"></p>
+<hr>
+<p>如有意见和建议，及时沟通。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/15/Flutter密码登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1154,7 +1252,7 @@
         
           <a href="/archives">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
